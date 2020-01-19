@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Microsoft.Extensions.DependencyInjection", "FluentAssertions.DependencyInjection\FluentAssertions.Microsoft.Extensions.DependencyInjection.csproj", "{FEE6DB1B-7026-495E-A360-95E7C872F5C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Microsoft.Extensions.DependencyInjection.Test", "FluentAssertions.DependencyInjection.Test\FluentAssertions.Microsoft.Extensions.DependencyInjection.Test.csproj", "{D57EB979-93A7-4413-A32D-460D7BC357B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEE6DB1B-7026-495E-A360-95E7C872F5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE6DB1B-7026-495E-A360-95E7C872F5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE6DB1B-7026-495E-A360-95E7C872F5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE6DB1B-7026-495E-A360-95E7C872F5C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57EB979-93A7-4413-A32D-460D7BC357B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57EB979-93A7-4413-A32D-460D7BC357B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57EB979-93A7-4413-A32D-460D7BC357B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57EB979-93A7-4413-A32D-460D7BC357B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EA53053-1C1E-4F95-B4F7-7060A05BDD11}
+	EndGlobalSection
+EndGlobal
