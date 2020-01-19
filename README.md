@@ -13,20 +13,30 @@ PM> Install-Package FluentAssertions.Microsoft.Extensions.DependencyInjection
 ```
 
 and start writing tests for your Microsoft.Extensions.DependencyInjection configuration.
+All extensions are borken into three types, Singleton, Scoped, and Transient
 
 ```csharp
-//check that there is singleton
 services.Should().ContianSingleton<ISomeService>();
 
-//check that there is transient
-services.Should().ContianTransient<ISomeService>();
-
-//check that there is scoped
 services.Should().ContianScoped<ISomeService>();
 
-//overloads to check if there are multiple services registered of the same type
-services.Should().ContianScoped<ISomeService>(2);
+services.Should().ContianTransient<ISomeService>();
+```
 
-//uensure the proper number of services has been registered
+each type has the same overloads to check different things
+
+```csharp
+//check that there is only one singleton, ignoring the implemation
+services.Should().ContianSingleton<ISomeService>();
+
+//check if there are multiple services registered of the same type and lifespan, ignoring implemations
+services.Should().ContianTransient<ISomeService>(2);
+
+//check that services contains both service and implentation type
+//note: this will only pass if there is one registration of TService,
+//checking multiple service implemations is not supported 
+services.Should().ContianScoped<ISomeService, SomeService>();
+
+//ensure the proper number of services has been registered
 services.Should().HaveCount(4);
 ```
