@@ -233,6 +233,19 @@ namespace FluentAssertions.Microsoft.Extensions.DependencyInjection.Test
         }
 
         [Fact]
+        public void ServiceCollection_Should_Contain_Transient_With_Multiple_Implementations()
+        {
+            services.AddTransient<ITransient, TransientOther>();
+
+            services.Should()
+                .HaveService<ITransient>()
+                .WithCount(2)
+                .WithImplementation<Transient>()
+                .WithImplementation<TransientOther>()
+                .AsTransient();
+        }
+
+        [Fact]
         public void ServiceCollection_Should_Not_Contain_Transient_With_Implementation()
         {
             Action act = () => services.Should()

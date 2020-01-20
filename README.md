@@ -13,30 +13,41 @@ PM> Install-Package FluentAssertions.Microsoft.Extensions.DependencyInjection
 ```
 
 and start writing tests for your Microsoft.Extensions.DependencyInjection configuration.
-All extensions are borken into three types, Singleton, Scoped, and Transient
+
+Methods
 
 ```csharp
-services.Should().ContianSingleton<ISomeService>();
+.Should()
+    .HaveCount(x) //check that the correct number of services has been registered in the IServiceCollection
+    .HaveService<TService>(); //check that a service of TService is registered
+    
+.HaveService<TService>()
+    .WithImplentation<SomeService>() //check if service is registered 
 
-services.Should().ContianScoped<ISomeService>();
-
-services.Should().ContianTransient<ISomeService>();
 ```
-
-each type has the same overloads to check different things
-
+Example:
 ```csharp
-//check that there is only one singleton, ignoring the implemation
-services.Should().ContianSingleton<ISomeService>();
 
-//check if there are multiple services registered of the same type and lifespan, ignoring implemations
-services.Should().ContianTransient<ISomeService>(2);
+//general usage example
+services.Should()
+        .HaveService<ISomeService>()
+        //Optional method to check if the collection contians the expected number of registrations
+        //for the found service. .As(Lifetime)() will default to checking that there is only one service
+        //registered if this method is ommitted
+        .WithCount(2)
+        //optional method to see if any of the registered services use the implentation, can be chained if 
+        //more then one service is registered
+        .WithImplentation<SomeService>()
+        //checks that the registered service has the correct lifetime (Singleton, Scoped, Transient)
+        //Will also ensure that there is only one service registered if the WithCount() operator is ommitted.
+        //Can Chain with And() method
+        .AsSingleton();
 
-//check that services contains both service and implentation type
-//note: this will only pass if there is one registration of TService,
-//checking multiple service implemations is not supported 
-services.Should().ContianScoped<ISomeService, SomeService>();
-
-//ensure the proper number of services has been registered
-services.Should().HaveCount(4);
+//And chain and HasCount(x) method
+services.Should()
+        .HaveService<ISomeService>()
+        .AsTransient()
+        .And()
+        //assert that the correct number of services has been registered
+        .HaveCount(4);
 ```
