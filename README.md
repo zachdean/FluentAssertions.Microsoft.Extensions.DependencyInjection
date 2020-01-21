@@ -22,7 +22,11 @@ Methods
     .HaveService<TService>(); //check that a service of TService is registered
     
 .HaveService<TService>()
-    .WithImplentation<SomeService>() //check if service is registered 
+    .WithImplentation<SomeService>() //check if TService is registered with implentation, can be chained for multiple registrations
+    .WithCount(int expected) //check if the correct number of TService's are registered, defualts to one if ommitted
+    .AsSingleton() //assert that all services of TService are registered as Singleton 
+    .AsScoped() //assert that all services of TService are registered as Scoped 
+    .AsTransient() //assert that all services of TService are registered as Transient 
 
 ```
 Example:
@@ -43,7 +47,7 @@ services.Should()
         //Can Chain with And() method
         .AsSingleton();
 
-//And chain and HasCount(x) method
+//check that service collection has Service And() HasCount(x) of total registered services
 services.Should()
         .HaveService<ISomeService>()
         .AsTransient()
