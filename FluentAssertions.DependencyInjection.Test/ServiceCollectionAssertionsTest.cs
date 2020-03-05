@@ -257,11 +257,36 @@ namespace FluentAssertions.Microsoft.Extensions.DependencyInjection.Test
             act.Should().Throw<XunitException>();
         }
 
+        [Fact]
+        public void ServiceCollection_Should_Initialize()
+        {
+            services.AddTransient<IHasDependency, HasDependency>();
+
+            services.Should()
+                .Initialize();
+        }
+
+        [Fact]
+        public void ServiceCollection_Should_Initialize_ExpectException()
+        {
+            var services = new ServiceCollection();
+            services.AddTransient<IHasDependency, HasDependency>();
+
+            Action act = () => services.Should()
+                .Initialize();
+
+            act.Should().Throw<Exception>();
+        }
+
         #endregion
 
         public interface ISingleton { }
         public interface ITransient { }
         public interface IScoped { }
+        public interface IHasDependency
+        {
+            
+        }
 
         public class Singleton : ISingleton { }
         public class SingletonOther : ISingleton { }
@@ -269,5 +294,14 @@ namespace FluentAssertions.Microsoft.Extensions.DependencyInjection.Test
         public class TransientOther : ITransient { }
         public class Scoped : IScoped { }
         public class ScopedOther : IScoped { }
+
+        public class HasDependency : IHasDependency
+        {
+            private readonly ISingleton _singleton;
+            public HasDependency(ISingleton singleton)
+            {
+                _singleton = singleton;
+            }
+        }
     }
 }

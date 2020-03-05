@@ -100,5 +100,15 @@ namespace FluentAssertions.Microsoft.Extensions.DependencyInjection
         }
 
         #endregion
+
+        public void  Initialize()
+        {
+            var provider = Subject.BuildServiceProvider();
+
+            foreach (var service in Subject)
+            {
+                provider.GetService(service.ServiceType);
+            }
+        }
     }
 }
